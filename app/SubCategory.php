@@ -1,0 +1,29 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class SubCategory extends Model
+{
+    //
+    use HasFactory;
+
+    protected $fillable = ['*'];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'sub_category_id', 'id');
+    }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'object');
+    }
+}
